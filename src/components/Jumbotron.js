@@ -1,13 +1,8 @@
-import React from 'react'
-
-
+import React from "react";
 
 class Jumbotron extends React.Component {
-
-
-
-  render () {
-    return(
+  render() {
+    return (
       <div>
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
@@ -19,15 +14,12 @@ class Jumbotron extends React.Component {
               frameBorder="<frameborder>"
               scrolling="<scrolling>"
               allowFullScreen="<allowfullscreen>"
-              >
-            </iframe>
+            />
           </div>
         </div>
       </div>
-    )
-
+    );
   }
 }
 
-
-export default Jumbotron ;
+export default Jumbotron;
