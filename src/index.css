@@ -6,7 +6,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #424242
 }
+
+h1,h2,h3,h4,h5,h6, p{
+  color: #FFF;
+  text-shadow: 2px 2px #202020;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -14,13 +21,16 @@ code {
 }
 
 .primary-color{
-  background-color: #548AE8
+  background-color: #B3381F
 }
 .secondary-color{
   background-color: #FF9A2E
 }
 .secondary-color-d{
-  background-color: #4775C4
+  background-color: #40B1BD
+}
+.link{
+  color: #FF9A2E;
 }
 
 
@@ -30,26 +40,35 @@ code {
   height: 17rem;
   margin: 10px;
   transition: .5s;
+  border: none;
+  background-color: #606060
+  ;
+  border-bottom: 5px solid #FF9A2E;
 
 }
 
 .card:hover{
   transform: scale(1.09);
-  box-shadow: 1px 3px 5px #555555;
+  box-shadow: 1px 7px 10px #202020;
 }
 
 .card-body{
   padding: 5px;
-  overflow:scroll;
+  overflow:auto;
+  margin: 14px;
 }
 .stream_card_container{
   display: flex;
   overflow:scroll;
+  margin: 30px;
+  padding: 15px;
 }
 
 .jumbotron{
   width: 100%;
   padding: 10px;
+  background-color: #303030;
+  box-shadow: 1px 3px 5px #202020;
 }
 
 .login_form_container{

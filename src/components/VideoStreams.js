@@ -3,7 +3,7 @@ import StreamCard from './StreamCard'
 import Jumbotron from './Jumbotron'
 
 
-class Stream extends React.Component {
+class VideoStream extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -13,17 +13,19 @@ class Stream extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3000/api/v1/livestreams')
+    fetch(`http://localhost:3000/api/v1/users/${this.state.jumbotronStream.id}/videos`)
     .then(resp => resp.json())
-    .then(streams => {
-      this.setState({
-        streams: streams.data
-      })
-    })
-      .then( streams=>{
-         const streamArray = this.state.streams.slice(0, 1)
-        this.setJumbotron(streamArray[0])
-      })
+    .then(resp => {
+      console.log('video stream data', resp)})
+    // .then(streams => {
+    //   this.setState({
+    //     streams: streams.data
+    //   })
+    // })
+      // .then( streams=>{
+      //    const streamArray = this.state.streams.slice(0, 1)
+      //   this.setJumbotron(streamArray[0])
+      // })
   }
 
   setJumbotron =(stream) => {
@@ -63,4 +65,4 @@ class Stream extends React.Component {
   }
 }
 
-export default Stream ;
+export default VideoStream ;

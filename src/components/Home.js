@@ -15,7 +15,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-
-// <header className="App-header">
-// </header>

@@ -33,6 +33,7 @@ class NavBar extends Component {
     })
     .then(resp => resp.json())
     .then(user => {
+      console.log(user)
       this.props.setLoggedInUser(user)
     })
   }
@@ -76,7 +77,7 @@ class NavBar extends Component {
 
 
   </div>
-  { !this.props.loggedIn ? <span>
+  { !this.props.loggedIn ? <span className='form-inline'>
   <form className="form-inline" onSubmit={this.handleSubmit}>
     <label className="sr-only" htmlFor="inlineFormInputGroupUsername2">Username</label>
     <div className="input-group mb-2 mr-sm-2">
@@ -101,13 +102,13 @@ class NavBar extends Component {
   <button type="submit" className="btn secondary-color mb-2">Login</button>
 </form>
 
-  <form onSubmit={this.props.renderSignUp}>
+  <form action="/signup">
     <button type='submit' className="btn secondary-color-d mb-2">Signup</button>
   </form>
 </span>
   : <form onSubmit={this.props.signOut}>
-    <button type='submit' className="btn secondary-color-d mb-2">Sign Out</button>
-  </form>
+      <button type='submit' className="btn secondary-color-d mb-2">Sign Out</button>
+    </form>
     }
 </nav>
 

@@ -15,8 +15,8 @@ class Stream extends React.Component {
           <div className="card" onClick={() => this.props.handleClickOnStream(stream)} >
             <img src={url} className="card-img-top" alt="..." />
             <div className="card-body">
-              <a href='#'>
-              <p className="card-text">{stream.user_name}</p>
+              <a href='#' className="link">
+              <p className="card-text link">{stream.user_name}</p>
               </a>
               <p className="card-text">{stream.title}</p>
             </div>

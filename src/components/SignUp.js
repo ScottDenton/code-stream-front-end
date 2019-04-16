@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class SignUp extends React.Component{
   constructor(props){
     super(props)
@@ -34,7 +35,7 @@ class SignUp extends React.Component{
     .then(user => {
       this.props.setLoggedInUser(user)
     })
-    .then(this.props.dismountSignUp)
+    .then(this.props.history.push("/"))
   }
 
   render(){
@@ -46,7 +47,7 @@ class SignUp extends React.Component{
       		    <span className="input-group-text"> <i className="fa fa-user"></i> </span>
       		 </div>
               <input name="username" className="form-control"
-                placeholder="Username" type="text" onChange={this.handleChange}/>
+                placeholder="Enter Twitch Username" type="text" onChange={this.handleChange}/>
           </div>
           <div className="form-group input-group">
           	<div className="input-group-prepend">
