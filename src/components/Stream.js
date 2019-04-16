@@ -34,6 +34,7 @@ class Stream extends React.Component {
 
   handleClickOnStream =(stream) => {
       this.setJumbotron(stream)
+      document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?channel=${stream.user_name}`
 
   }
 
