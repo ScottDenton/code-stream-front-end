@@ -17,20 +17,20 @@ state={
     }, this.fetchThisUsersData)
   }
 
-  // fetchThisUsersData =() =>  {
-  //   fetch(`https://api.twitch.tv/helix/streams?user_id=${this.state.id}`, {
-  //     method: "GET",
-  //     headers: {
-  //       'Client-ID': Key
-  //     }
-  //   }).then(resp => resp.json())
-  //   .then(stream => {
-  //     this.setState({
-  //       stream: stream.data[0]
-  //     })
-  //     }
-  //   )
-  // }
+  fetchThisUsersData =() =>  {
+    console.log(this.state.id)
+    fetch(`http://localhost:3000/api/v1/users/${this.state.id}`)
+    .then(resp => resp.json())
+    .then(resp=> {
+      console.log('fetching user data', resp)
+    })
+    // .then(stream => {
+    //   this.setState({
+    //     stream: stream.data
+    //   })
+    //   }
+    // )
+  }
 
   render () {
     const stream = this.state.stream
@@ -43,6 +43,7 @@ state={
           src={`https://player.twitch.tv/?video=${stream.id}&autoplay=true`}
           height="400"
           width="800"
+          title={stream.title}
           frameBorder="<frameborder>"
           scrolling="<scrolling>"
           allowFullScreen="<allowfullscreen>"

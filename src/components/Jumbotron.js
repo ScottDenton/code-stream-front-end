@@ -1,31 +1,27 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import ReactTwitchEmbedVideo from 'react-twitch-embed-video'
 
 
 
 class Jumbotron extends React.Component {
 
 
-
   render () {
+    const stream = this.props.stream
+    console.log('jumbotron stream', stream)
+
     return(
+
       <div>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 className="display-4"></h1>
-            <iframe
-              src={`https://player.twitch.tv/?video=&autoplay=true`}
-              height="400"
-              width="800"
-              frameBorder="<frameborder>"
-              scrolling="<scrolling>"
-              allowFullScreen="<allowfullscreen>"
-              >
-            </iframe>
+              <ReactTwitchEmbedVideo channel={stream.user_name}/>
             <div>
-              <Link to ={`users/${this.props.stream.user_id}`}>
-                <h1>{this.props.stream.user_name}</h1>
+              <Link to ={`users/${stream.user_id}`}>
+                <h1>{stream.user_name}</h1>
               </Link>
+                <h5>{stream.title}</h5>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
 import Home from './components/Home'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignUp from './components/SignUp'
 import NavBar from './components/NavBar'
 
@@ -68,7 +67,3 @@ class App extends Component {
 
 
 export default App;
-// <Router>
-// <Route path='/signup' component={(props) => <SignUp {...props} setLoggedInUser={this.setLoggedInUser} /> } />
-// </Router>
-// //

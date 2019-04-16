@@ -8,7 +8,7 @@ class Stream extends React.Component {
     super()
     this.state = {
       streams: [],
-      jumbotronStream:''
+      jumbotronStream:{id: "33691327920", user_id: "107939114", user_name: "DutchsinseOfficial", game_id: "509670"}
     }
   }
 
@@ -27,16 +27,13 @@ class Stream extends React.Component {
   }
 
   setJumbotron =(stream) => {
-    console.log('jumbo', stream)
     this.setState({
       jumbotronStream: stream
     })
   }
 
   handleClickOnStream =(stream) => {
-    console.log('click the stream', stream)
       this.setJumbotron(stream)
-    console.log('state was set', this.state.jumbotronStream)
 
   }
 
@@ -53,7 +50,6 @@ class Stream extends React.Component {
 
 
   render () {
-    console.log(this.state.streams)
     return(
       <div>
       <Jumbotron stream={this.state.jumbotronStream}/>
