@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "./NavBar";
 import VideoStreams from "./VideoStreams";
 
 class UserShow extends React.Component {

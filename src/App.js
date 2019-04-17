@@ -3,7 +3,6 @@ import "./Home.css";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
-import ReactDOM from "react-dom";
 import "./index.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import UserShow from "./components/UserShow.js";
