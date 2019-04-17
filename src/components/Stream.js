@@ -82,20 +82,25 @@ class Stream extends React.Component {
 
   renderIndividualFave = (obj) => {
       const arr =  Object.values(obj)
-      console.log(arr)
+      const keys =Object.keys(obj)
+      let counter = 0
        return arr.map(vidarr => {
-         console.log('vidarr', vidarr)
-        return <div className="stream_card_container">
-          {vidarr.map(stream => {
-            console.log('stream', stream)
-            return (
-              <StreamCard
-                stream={stream}
-                key={stream.title}
-                handleClickOnStream={this.handleClickOnStream}
-                />
-            );
-          })};
+         counter ++;
+        return<div>
+        <h6>{keys[counter-1]} </h6>
+          <div className="stream_card_container">
+
+            {vidarr.map(stream => {
+              console.log('stream', stream)
+              return (
+                <StreamCard
+                  stream={stream}
+                  key={stream.title}
+                  handleClickOnStream={this.handleClickOnStream}
+                  />
+              );
+            })};
+          </div>
         </div>
       })
 
