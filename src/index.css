@@ -1,86 +1,86 @@
 body {
   margin: 0;
   padding: 0;
+  padding-bottom: 5em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #424242
+  background-color: #424242;
 }
 
-h1,h2,h3,h4,h5,h6, p{
-  color: #FFF;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #fff;
   text-shadow: 2px 2px #202020;
 }
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.primary-color{
-  background-color: #B3381F
+.primary-color {
+  background-color: #b3381f;
 }
-.secondary-color{
-  background-color: #FF9A2E
+.secondary-color {
+  background-color: #ff9a2e;
 }
-.secondary-color-d{
-  background-color: #40B1BD
+.secondary-color-d {
+  background-color: #40b1bd;
 }
-.link{
-  color: #FF9A2E;
+.link {
+  color: #ff9a2e;
 }
-
-
 
 .card {
-  width: 15rem;
-  height: 17rem;
+  width: 15em;
+  height: 17em;
   margin: 10px;
-  transition: .5s;
+  transition: 0.5s;
   border: none;
-  background-color: #606060
-  ;
-  border-bottom: 5px solid #FF9A2E;
-
+  background-color: #606060;
+  border-bottom: 5px solid #ff9a2e;
 }
 
-.card:hover{
+.card:hover {
   transform: scale(1.09);
   box-shadow: 1px 7px 10px #202020;
 }
 
-.card-body{
+.card-body {
   padding: 5px;
-  overflow:auto;
+  overflow: auto;
   margin: 14px;
 }
-.stream_card_container{
+.stream_card_container {
   display: flex;
-  overflow:scroll;
+  overflow: scroll;
   margin: 30px;
   padding: 15px;
 }
 
-.jumbotron{
+.jumbotron {
   width: 100%;
   padding: 10px;
   background-color: #303030;
   box-shadow: 1px 3px 5px #202020;
 }
 
-.login_form_container{
+.login_form_container {
   background-color: #f2f2f2;
-  margin-top:10vh;
-  margin-left:40vw;
-  margin-right:40vw;
+  margin-top: 10vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
   padding-bottom: 20vh;
-
-
 }
-.login_form{
+.login_form {
   align-content: center;
   padding-top: 100px;
 }

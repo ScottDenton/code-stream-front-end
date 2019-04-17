@@ -1,12 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import ReactTwitchEmbedVideo from 'react-twitch-embed-video'
-
-
+import React from "react";
+import { Link } from "react-router-dom";
+import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 
 class Jumbotron extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
   handleFollowClick =(stream) =>{
@@ -27,18 +25,17 @@ class Jumbotron extends React.Component {
 
 
 
-  render () {
-    const stream = this.props.stream
+  render() {
+    const stream = this.props.stream;
 
-    return(
-
+    return (
       <div>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-              <ReactTwitchEmbedVideo channel={stream.user_name}/>
+            <ReactTwitchEmbedVideo channel={stream.user_name} />
             <div>
-              <Link to ={`users/${stream.user_id}`}>
-                <h1 className='link'>{stream.user_name}</h1>
+              <Link to={`users/${stream.user_id}`}>
+                <h1 className="link">{stream.user_name}</h1>
               </Link>
               <button id="follow-btn" onClick={() => this.handleFollowClick(stream) }> Follow this user </button>
                 <h5>{stream.title}</h5>
@@ -47,10 +44,8 @@ class Jumbotron extends React.Component {
           </div>
         </div>
       </div>
-    )
-
+    );
   }
 }
 
-
-export default Jumbotron ;
+export default Jumbotron;
