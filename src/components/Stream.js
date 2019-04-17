@@ -7,6 +7,7 @@ class Stream extends React.Component {
     super();
     this.state = {
       streams: [],
+      favoritesVideos: [],
       jumbotronStream: {
         id: "33691327920",
         user_id: "107939114",
@@ -61,16 +62,26 @@ class Stream extends React.Component {
     ).children[0].src = `https://embed.twitch.tv/?channel=${stream.user_name}`;
   };
 
-  renderStreams = () => {
-    return this.state.streams.map(stream => {
-      return (
-        <StreamCard
-          stream={stream}
-          key={stream.title}
-          handleClickOnStream={this.handleClickOnStream}
-        />
-      );
-    });
+  fetchFavoriteVideos(){
+    // this.props.followedUsers
+  }
+
+  renderStreams = (arr) => {
+    return <div>
+      <h6>Live Streams </h6>
+        <div className="stream_card_container">
+           {arr.map(stream => {
+            return (
+              <StreamCard
+                stream={stream}
+                key={stream.title}
+                handleClickOnStream={this.handleClickOnStream}
+                />
+            );
+          })};
+        </div>
+        <h6> My Favorites</h6>
+    </div>
   };
 
   render() {
@@ -83,10 +94,7 @@ class Stream extends React.Component {
         followedUsers={this.props.followedUsers}
         handleUnFollowClick={this.props.handleUnFollowClick}
         />
-      <h6>Live Streams </h6>
-        <div className="stream_card_container">
-          {this.renderStreams()}
-        </div>
+      {this.renderStreams(this.state.streams)}
       </div>
     );
   }

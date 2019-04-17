@@ -5,10 +5,6 @@ export default class FollowButton extends Component {
     super(props)
   }
 
-
-
-
-
   render () {
     const name = this.props.stream.user_name
     const buttonToRender = this.props.followedUsers.includes(name) ?
