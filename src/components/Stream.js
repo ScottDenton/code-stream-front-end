@@ -95,22 +95,21 @@ class Stream extends React.Component {
   findVideosByUsername =(username) =>{
     let user_id;
     let id;
-
     fetch('http://localhost:3000/api/v1/users')
     .then(resp => resp.json())
     .then(users => {
-        return users.find(user => (
-       user.user_name ===username
-     )).then(user =>{
-       user_id = user.user_id
-       id = user.id
-     })
-    })
+        const foundUser =  users.data.find(user => {
+          console.log(username)
+          console.log(user)
+          return user.user_name === username
+        })
+          user_id = foundUser.user_id
+          id = foundUser.id
+      })
     .then(users =>{
       const body={
         twitch_id: user_id
       }
-      
       fetch(`http://localhost:3000/sessions/getUserVideos`,{
         method: "POST",
         headers: {
@@ -120,8 +119,7 @@ class Stream extends React.Component {
         body: JSON.stringify(body)
       }).then(resp => resp.json())
       .then(console.log)
-    }})
-    )
+    })
   }
 
 
