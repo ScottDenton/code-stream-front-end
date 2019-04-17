@@ -1,13 +1,12 @@
 import React from 'react'
 import NavBar from './NavBar'
-import Key from '../.key.js'
-
-
+import VideoStreams from './VideoStreams'
 
 class UserShow extends React.Component {
 state={
   id: '',
-  stream: []
+  videos: [],
+  jumbotronStream : {id: "411937859", user_id: "32540179", user_name: "...loading", title: "...loading",}
 }
 
   componentDidMount(){
@@ -18,36 +17,41 @@ state={
   }
 
   fetchThisUsersData =() =>  {
-    fetch(`https://api.twitch.tv/helix/streams?user_id=${this.state.id}`, {
-      method: "GET",
-      headers: {
-        'Client-ID': Key
-      }
-    }).then(resp => resp.json())
-    .then(stream => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.id}/videos`)
+    .then(resp => resp.json())
+    .then(videos=> {
       this.setState({
-        stream: stream.data[0]
+        videos: videos.data,
+        jumbotronStream: videos.data[0]
       })
-      }
-    )
+    })
   }
 
+  setJumbotron =(video) => {
+    this.setState({
+      jumbotronStream: video
+    })
+  }
+    handleClickOnStream =(video) => {
+        this.setJumbotron(video);
+        if(video.type==='archive'){
+          document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?video=${video.id}`
+        } else {
+          document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?channel=${video.user_id}`
+        }
+    }
+
+
+
   render () {
-    const stream = this.state.stream
-    console.log(stream)
+
     return(
       <div className="Home">
-        <NavBar />
-        <h1>{stream.title} </h1>
-        <iframe
-          src={`https://player.twitch.tv/?video=${stream.id}&autoplay=true`}
-          height="400"
-          width="800"
-          frameBorder="<frameborder>"
-          scrolling="<scrolling>"
-          allowFullScreen="<allowfullscreen>"
-          >
-        </iframe>
+        <VideoStreams
+          loggedInUser={this.props.loggedInUser}
+          videos={this.state.videos}
+          jumbotronStream={this.state.jumbotronStream}
+          handleClickOnStream={this.handleClickOnStream}/>
       </div>
     )
 

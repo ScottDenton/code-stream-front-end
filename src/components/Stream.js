@@ -1,7 +1,6 @@
 import React from 'react'
 import StreamCard from './StreamCard'
 import Jumbotron from './Jumbotron'
-import Key from '../.key.js'
 
 
 class Stream extends React.Component {
@@ -9,44 +8,57 @@ class Stream extends React.Component {
     super()
     this.state = {
       streams: [],
-      jumbotronStream: []
+      jumbotronStream:{id: "33691327920", user_id: "107939114", user_name: "DutchsinseOfficial", game_id: "509670"}
     }
   }
 
   componentDidMount(){
-    fetch('https://api.twitch.tv/helix/streams', {
-      method: "GET",
-      headers: {
-        'Client-ID': Key
-      }
-    }).then(resp => resp.json())
+    fetch('http://localhost:3000/api/v1/livestreams')
+    .then(resp => resp.json())
     .then(streams => {
       this.setState({
         streams: streams.data
-      }, this.setJumbotron(this.state.streams.slice(0, 1)))
-    })
+      })
+      // seed db with users
+      // streams.data.map(stream =>{
+    //     const body={
+    //       user: {
+    //         username: stream.user_name,
+    //         user_id: stream.user_id,
+    //         password: 'temp'
+    //       }
+    //     }
+    //     fetch('http://localhost:3000/api/v1/users', {
+    //       method: "POST",
+    //       headers: {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify(body)
+    //     }).then(resp => resp.json())
+    //   })
+     })
+      .then(streams=>{
+         const streamArray = this.state.streams.slice(0, 1)
+        this.setJumbotron(streamArray[0])
+      })
+    }
 
-  }
 
   setJumbotron =(stream) => {
-    let counter = 0
-    console.log("setJumotron has been called: ", counter += 1)
     this.setState({
       jumbotronStream: stream
     })
   }
 
   handleClickOnStream =(stream) => {
-    console.log('click the stream', stream)
-      this.setJumbotron(stream)
-    console.log('state was set', this.state.jumbotronStream)
+      this.setJumbotron(stream);
+      document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?channel=${stream.user_name}`
 
   }
 
   renderStreams = () => {
-
       return this.state.streams.map(stream => {
-
           return  <StreamCard
           stream={stream}
           key={stream.title}
@@ -61,7 +73,7 @@ class Stream extends React.Component {
       <div>
       <Jumbotron stream={this.state.jumbotronStream}/>
       <h6>Live Streams </h6>
-        <div class="stream_card_container">
+        <div className="stream_card_container">
           {this.renderStreams()}
         </div>
       </div>

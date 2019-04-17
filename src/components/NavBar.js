@@ -1,14 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
 
-class NavBar extends React.Component {
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const body = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
+    fetch("http://localhost:3000/sessions/create", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(resp => resp.json())
+      .then(user => {
+        this.props.setLoggedInUser(user);
+      });
+  };
+
   render() {
     return (
-      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">
+      <nav className="navbar sticky-top navbar-expand-lg navbar-light primary-color">
+        <a className="navbar-brand" href="/">
           CodeStream
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -16,14 +51,14 @@ class NavBar extends React.Component {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon" />
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -33,27 +68,27 @@ class NavBar extends React.Component {
               >
                 Categories
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
                   React
                 </a>
-                <div class="dropdown-divider" />
-                <a class="dropdown-item" href="#">
+                <div className="dropdown-divider" />
+                <a className="dropdown-item" href="#">
                   JavaScript
                 </a>
-                <div class="dropdown-divider" />
-                <a class="dropdown-item" href="#">
+                <div className="dropdown-divider" />
+                <a className="dropdown-item" href="#">
                   Ruby
                 </a>
-                <div class="dropdown-divider" />
-                <a class="dropdown-item" href="#">
+                <div className="dropdown-divider" />
+                <a className="dropdown-item" href="#">
                   Rails
                 </a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -63,53 +98,79 @@ class NavBar extends React.Component {
               >
                 User
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/user/edit">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="/user/edit">
                   My Account
                 </a>
               </div>
             </li>
           </ul>
         </div>
-        <form class="form-inline">
-          <label class="sr-only" for="inlineFormInputGroupUsername2">
-            Username
-          </label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="far fa-user" />
+        {!this.props.loggedIn ? (
+          <span className="form-inline">
+            <form className="form-inline" onSubmit={this.handleSubmit}>
+              <label
+                className="sr-only"
+                htmlFor="inlineFormInputGroupUsername2"
+              >
+                Username
+              </label>
+              <div className="input-group mb-2 mr-sm-2">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">
+                    <i className="far fa-user" />
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  name="username"
+                  className="form-control"
+                  id="username_login"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                />
               </div>
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              id="username_login"
-              placeholder="Username"
-            />
-          </div>
 
-          <label class="sr-only" for="inlineFormInputGroupUsername2">
-            Username
-          </label>
-          <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fas fa-key" />
+              <label
+                className="sr-only"
+                htmlFor="inlineFormInputGroupUsername2"
+              >
+                Username
+              </label>
+              <div className="input-group mb-2 mr-sm-2">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">
+                    <i className="fas fa-key" />
+                  </div>
+                </div>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  id="password_login"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
               </div>
-            </div>
-            <input
-              type="password"
-              class="form-control"
-              id="password_login"
-              placeholder="password"
-            />
-          </div>
 
-          <button type="submit" class="btn btn-primary mb-2">
-            Get me in there
-          </button>
-        </form>
+              <button type="submit" className="btn secondary-color mb-2">
+                Login
+              </button>
+            </form>
+
+            <form action="/signup">
+              <button type="submit" className="btn secondary-color-d mb-2">
+                Signup
+              </button>
+            </form>
+          </span>
+        ) : (
+          <form onSubmit={this.props.signOut}>
+            <button type="submit" className="btn secondary-color-d mb-2">
+              Sign Out
+            </button>
+          </form>
+        )}
       </nav>
     );
   }

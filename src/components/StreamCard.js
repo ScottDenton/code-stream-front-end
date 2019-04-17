@@ -1,26 +1,25 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import ReactTwitchEmbedVideo from 'react-twitch-embed-video'
+
+
+
 
 class Stream extends React.Component {
-  render() {
-    const stream = this.props.stream;
-    const userPage = "show/" + stream.id;
-    return (
+
+
+  render () {
+    const stream=this.props.stream
+    const url = `https://static-cdn.jtvnw.net/previews-ttv/live_user_${stream.user_name}-220x150.jpg`
+    return(
       <div>
-        <div
-          class="card"
-          onClick={() => this.props.handleClickOnStream(stream)}
-        >
-          <img
-            src="https://static-cdn.jtvnw.net/previews-ttv/live_user_riotgames-400x225.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <a href={userPage} class="card-text">
-              {stream.user_name}
-            </a>
-            <p class="card-text">{stream.title}</p>
+          <div className="card" onClick={() => this.props.handleClickOnStream(stream)} >
+            <img src={url} className="card-img-top" alt="..." />
+            <div className="card-body">
+              <a href='#' className="link">
+              <p className="card-text link">{stream.user_name}</p>
+              </a>
+              <p className="card-text">{stream.title}</p>
+            </div>
           </div>
         </div>
       </div>
