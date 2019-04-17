@@ -3,18 +3,18 @@ import StreamCard from "./StreamCard";
 import Jumbotron from "./Jumbotron";
 
 class Stream extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       streams: [],
-      favoritesVideos: {},
+      favoritesVideos: [],
       jumbotronStream: {
         id: "33691327920",
         user_id: "107939114",
         user_name: "DutchsinseOfficial",
         game_id: "509670"
       }
-    };
+    }
   }
 
   componentDidMount() {
@@ -25,23 +25,23 @@ class Stream extends React.Component {
           streams: streams.data
         });
         // seed db with users
-        // streams.data.map(stream =>{
-        //     const body={
-        //       user: {
-        //         username: stream.user_name,
-        //         user_id: stream.user_id,
-        //         password: 'temp'
-        //       }
-        //     }
-        //     fetch('http://localhost:3000/api/v1/users', {
-        //       method: "POST",
-        //       headers: {
-        //         "Accept": "application/json",
-        //         "Content-Type": "application/json"
-        //       },
-        //       body: JSON.stringify(body)
-        //     }).then(resp => resp.json())
-        //   })
+        streams.data.map(stream =>{
+            const body={
+              user: {
+                username: stream.user_name,
+                user_id: stream.user_id,
+                password: 'temp'
+              }
+            }
+            fetch('http://localhost:3000/api/v1/users', {
+              method: "POST",
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(body)
+            }).then(resp => resp.json())
+          })
       })
       .then(streams => {
         const streamArray = this.state.streams.slice(0, 1);
@@ -80,50 +80,29 @@ class Stream extends React.Component {
     </div>
   };
 
-  fetchFavoriteVideos = () => {
-      {this.props.followedUsers.map(user => {
-        const videos = this.findVideosByUsername(user)
-        return <div>
-          <h6> {user} Favorites</h6>
-
+  renderIndividualFave = (obj) => {
+      const arr =  Object.values(obj)
+      console.log(arr)
+       return arr.map(vidarr => {
+         console.log('vidarr', vidarr)
+        return <div className="stream_card_container">
+          {vidarr.map(stream => {
+            console.log('stream', stream)
+            return (
+              <StreamCard
+                stream={stream}
+                key={stream.title}
+                handleClickOnStream={this.handleClickOnStream}
+                />
+            );
+          })};
         </div>
-      })}
+      })
+
 
   }
 
-  findVideosByUsername =(username) =>{
-    let user_id;
-    let id;
-    fetch('http://localhost:3000/api/v1/users')
-    .then(resp => resp.json())
-    .then(users => {
-        const foundUser =  users.find(user => {
-          return user.username === username
-        })
-          user_id = foundUser.user_id
-          id = foundUser.id
-      })
-    .then(users =>{
-      const body={twitch_id: user_id}
-      fetch(`http://localhost:3000/sessions/getUserVideos`,{
-        method: "POST",
-        headers: {
-          'Accept': "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-      })
-      .then(resp => resp.json())
-      .then(json => {
-        console.log(json.data)
-        this.setState({
-          favoritesVideos: {
-            username:json.data
-          }
-        })
-      })
-    })
-  }
+
 
 
   render() {
@@ -137,7 +116,7 @@ class Stream extends React.Component {
         handleUnFollowClick={this.props.handleUnFollowClick}
         />
       {this.renderStreams(this.state.streams)}
-      {this.fetchFavoriteVideos()}
+      {this.renderIndividualFave(this.props.faveVids)}
       </div>
     );
   }

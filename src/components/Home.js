@@ -9,7 +9,8 @@ class Home extends Component {
         <Stream loggedInUser={this.props.loggedInUser}
           handleFollowClick={this.props.handleFollowClick}
           followedUsers={this.props.followedUsers}
-          handleUnFollowClick={this.props.handleUnFollowClick}/>
+          handleUnFollowClick={this.props.handleUnFollowClick}
+          faveVids={this.props.faveVids}/>
       </div>
     );
   }
