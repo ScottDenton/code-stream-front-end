@@ -71,7 +71,9 @@ class Stream extends React.Component {
   render () {
     return(
       <div>
-      <Jumbotron stream={this.state.jumbotronStream}/>
+      <Jumbotron stream={this.state.jumbotronStream}
+        loggedInUser={this.props.loggedInUser}
+        />
       <h6>Live Streams </h6>
         <div className="stream_card_container">
           {this.renderStreams()}

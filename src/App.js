@@ -16,15 +16,25 @@ class App extends Component {
     this.state={
       loggedInUser: {},
       loggedIn: false,
-      displaySignUp: false
+      displaySignUp: false,
+      followedUsers: []
     }
   }
+
+fetchFavorites = ()=> {
+  fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+  .then(resp => resp.json())
+  .then(followedUsers => {
+    this.setState({followedUsers})
+  })
+}
+
 
   setLoggedInUser = (user) =>{
     this.setState({
       loggedInUser: user,
       loggedIn: true
-    })
+    }, this.fetchFavorites)
   }
 
   signOut =() =>{
@@ -45,7 +55,10 @@ class App extends Component {
             loggedIn={this.state.loggedIn}/>}
           />
           <Route exact path ='/'
-            component={Home}
+          render={(props) => <Home
+          {...props}
+          loggedInUser={this.state.loggedInUser}
+          />}
           />
           <Route exact path ='/signup'
             render={(props) => <SignUp
