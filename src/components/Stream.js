@@ -62,9 +62,6 @@ class Stream extends React.Component {
     ).children[0].src = `https://embed.twitch.tv/?channel=${stream.user_name}`;
   };
 
-  fetchFavoriteVideos(){
-    // this.props.followedUsers
-  }
 
   renderStreams = (arr) => {
     return <div>
@@ -80,9 +77,53 @@ class Stream extends React.Component {
             );
           })};
         </div>
-        <h6> My Favorites</h6>
+        {this.fetchFavoriteVideos()}
     </div>
   };
+
+  fetchFavoriteVideos(){
+      {this.props.followedUsers.map(user => {
+        const videos = this.findVideosByUsername(user)
+        return <div>
+          <h6> {user} Favorites</h6>
+
+        </div>
+      })}
+
+  }
+
+  findVideosByUsername =(username) =>{
+    let user_id;
+    let id;
+
+    fetch('http://localhost:3000/api/v1/users')
+    .then(resp => resp.json())
+    .then(users => {
+        return users.find(user => (
+       user.user_name ===username
+     )).then(user =>{
+       user_id = user.user_id
+       id = user.id
+     })
+    })
+    .then(users =>{
+      const body={
+        twitch_id: user_id
+      }
+      
+      fetch(`http://localhost:3000/sessions/getUserVideos`,{
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      }).then(resp => resp.json())
+      .then(console.log)
+    }})
+    )
+  }
+
 
   render() {
     return (
