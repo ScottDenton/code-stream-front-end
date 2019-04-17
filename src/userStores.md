@@ -45,6 +45,8 @@ password validation- client side. repeat password etc
 
 
 
+live videos have some special css
+
 
 
 

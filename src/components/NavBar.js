@@ -33,7 +33,6 @@ class NavBar extends Component {
     })
     .then(resp => resp.json())
     .then(user => {
-      console.log(user)
       this.props.setLoggedInUser(user)
     })
   }

@@ -19,12 +19,31 @@ class Stream extends React.Component {
       this.setState({
         streams: streams.data
       })
-    })
-      .then( streams=>{
+      // seed db with users
+      // streams.data.map(stream =>{
+    //     const body={
+    //       user: {
+    //         username: stream.user_name,
+    //         user_id: stream.user_id,
+    //         password: 'temp'
+    //       }
+    //     }
+    //     fetch('http://localhost:3000/api/v1/users', {
+    //       method: "POST",
+    //       headers: {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify(body)
+    //     }).then(resp => resp.json())
+    //   })
+     })
+      .then(streams=>{
          const streamArray = this.state.streams.slice(0, 1)
         this.setJumbotron(streamArray[0])
       })
-  }
+    }
+
 
   setJumbotron =(stream) => {
     this.setState({

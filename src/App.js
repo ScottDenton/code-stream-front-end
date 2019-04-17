@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   setLoggedInUser = ( user) =>{
-    console.log('User within home.js')
     this.setState({
       loggedInUser: user,
       loggedIn: true
@@ -37,20 +36,6 @@ class App extends Component {
 
 
   render() {
-    // if(!this.state.displaySignUp) {
-    //   return <div className="Home">
-    //           <NavBar  renderSignUp={this.renderSignUp}
-    //             loggedInUser={this.state.loggedInUser}
-    //             setLoggedInUser={this.setLoggedInUser}
-    //             loggedIn={this.state.loggedIn}
-    //             logInUser={this.logInUser}/>
-    //           <Home />
-    //         </div>
-    // } else {
-    //   return <SignUp setLoggedInUser={this.setLoggedInUser}
-    //                   dismountSignUp={this.dismountSignUp}
-    //                   signOut={this.signOut}/>
-    // }
     return(
       <Router>
         <React.Fragment>

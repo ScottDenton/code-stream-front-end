@@ -2,12 +2,11 @@ import React from 'react'
 import NavBar from './NavBar'
 import VideoStreams from './VideoStreams'
 
-
-
 class UserShow extends React.Component {
 state={
   id: '',
-  stream: []
+  videos: [],
+  jumbotronStream : {id: "411937859", user_id: "32540179", user_name: "...loading", title: "...loading",}
 }
 
   componentDidMount(){
@@ -18,20 +17,41 @@ state={
   }
 
   fetchThisUsersData =() =>  {
-    console.log('sterasmsa', this.state.id)
     fetch(`http://localhost:3000/api/v1/users/${this.state.id}/videos`)
     .then(resp => resp.json())
-    .then(resp=> {
-      console.log('fetching user data', resp)
+    .then(videos=> {
+      this.setState({
+        videos: videos.data,
+        jumbotronStream: videos.data[0]
+      })
     })
   }
 
+  setJumbotron =(video) => {
+    this.setState({
+      jumbotronStream: video
+    })
+  }
+    handleClickOnStream =(video) => {
+        this.setJumbotron(video);
+        if(video.type==='archive'){
+          document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?video=${video.id}`
+        } else {
+          document.getElementById("twitch-embed").children[0].src= `https://embed.twitch.tv/?channel=${video.user_id}`
+        }
+    }
+
+
+
   render () {
-    const stream = this.state.stream
-    console.log(stream)
+
     return(
       <div className="Home">
-        <VideoStreams />
+        <VideoStreams
+          loggedInUser={this.props.loggedInUser}
+          videos={this.state.videos}
+          jumbotronStream={this.state.jumbotronStream}
+          handleClickOnStream={this.handleClickOnStream}/>
       </div>
     )
 
