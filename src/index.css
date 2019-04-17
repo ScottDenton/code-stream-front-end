@@ -7,49 +7,46 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #424242
+  background-color: #424242;
 }
 
-h1,h2,h3,h4,h5,h6, p{
-  color: #FFF;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #fff;
   text-shadow: 2px 2px #202020;
 }
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.primary-color{
-  background-color: #B3381F
+.primary-color {
+  background-color: #b3381f;
 }
-.secondary-color{
-  background-color: #FF9A2E
+.secondary-color {
+  background-color: #ff9a2e;
 }
-.secondary-color-d{
-  background-color: #40B1BD
+.secondary-color-d {
+  background-color: #40b1bd;
 }
-.link{
-  color: #FF9A2E;
+.link {
+  color: #ff9a2e;
 }
-
-
 
 .card {
   width: 15em;
   height: 17em;
   margin: 10px;
-<<<<<<< HEAD
   transition: 0.5s;
-=======
-  transition: .5s;
   border: none;
-  background-color: #606060
-  ;
-  border-bottom: 5px solid #FF9A2E;
-
->>>>>>> cfc84b57037dedae9a0cb0c1fd38a2366786355f
+  background-color: #606060;
+  border-bottom: 5px solid #ff9a2e;
 }
 
 .card:hover {
@@ -59,12 +56,12 @@ code {
 
 .card-body {
   padding: 5px;
-  overflow:auto;
+  overflow: auto;
   margin: 14px;
 }
 .stream_card_container {
   display: flex;
-  overflow:scroll;
+  overflow: scroll;
   margin: 30px;
   padding: 15px;
 }
