@@ -22,10 +22,12 @@ fetchFavorites = ()=> {
   fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
   .then(resp => resp.json())
   .then(followedUsers => {
-    this.setState({followedUsers})
+    const usernames= followedUsers.map(favorite => {
+      return favorite.followed_username
+    })
+    this.setState({followedUsers: usernames})
   })
 }
-
 
   setLoggedInUser = (user) =>{
     this.setState({
@@ -40,6 +42,40 @@ fetchFavorites = ()=> {
     });
   };
 
+  handleFollowClick =(stream) =>{
+    const body={
+        followed_name: stream.user_name
+    }
+    fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`,
+      {
+      method: "POST",
+          headers: {
+            "Accept": "application/jsofn",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        })
+        this.setState({
+          followedUsers: [...this.state.followedUsers, stream.user_name]
+        })
+     }
+
+  handleUnFollowClick =(stream) =>{
+      fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+    .then(resp => resp.json())
+    .then(favorites =>{
+      const favorite = favorites.find(fave => (fave.followed_username === stream.user_name))
+      fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`, {
+        method: "DELETE"
+      })
+    })
+    this.setState({
+      followedUsers: this.state.followedUsers.filter(name => (
+        name !== stream.user_name
+      ))
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -52,6 +88,7 @@ fetchFavorites = ()=> {
                 loggedInUser={this.state.loggedInUser}
                 setLoggedInUser={this.setLoggedInUser}
                 loggedIn={this.state.loggedIn}
+
               />
             )}
           />
@@ -59,6 +96,9 @@ fetchFavorites = ()=> {
           render={(props) => <Home
           {...props}
           loggedInUser={this.state.loggedInUser}
+          handleFollowClick={this.handleFollowClick}
+          handleUnFollowClick={this.handleUnFollowClick}
+          followedUsers={this.state.followedUsers}
           />}
           />
           <Route exact path ='/signup'

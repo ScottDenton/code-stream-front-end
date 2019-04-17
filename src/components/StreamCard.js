@@ -20,7 +20,7 @@ class Stream extends React.Component {
               <p className="card-text">{stream.title}</p>
             </div>
           </div>
-        </div>
+
       </div>
     );
   }
