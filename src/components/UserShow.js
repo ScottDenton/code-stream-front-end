@@ -16,39 +16,32 @@ class UserShow extends React.Component {
   componentDidMount() {
     const handle = this.props.match.params;
     this.setState(
-      {
-        id: handle.id
-      },
+      { id: handle.id },
       this.fetchThisUsersData
     );
   }
 
   fetchThisUsersData = () => {
     fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.id}/videos`)
-      .then(resp => resp.json())
-      .then(videos => {
-        this.setState({
-          videos: videos.data,
-          jumbotronStream: videos.data[0]
-        });
+    .then(resp => resp.json())
+    .then(videos => {
+      this.setState({
+        videos: videos.data,
+        jumbotronStream: videos.data[0]
       });
+    });
   };
 
   setJumbotron = video => {
-    this.setState({
-      jumbotronStream: video
-    });
+    this.setState({ jumbotronStream: video });
   };
+
   handleClickOnStream = video => {
     this.setJumbotron(video);
     if (video.type === "archive") {
-      document.getElementById(
-        "twitch-embed"
-      ).children[0].src = `https://embed.twitch.tv/?video=${video.id}`;
+      document.getElementById("twitch-embed").children[0].src = `https://embed.twitch.tv/?video=${video.id}`;
     } else {
-      document.getElementById(
-        "twitch-embed"
-      ).children[0].src = `https://embed.twitch.tv/?channel=${video.user_id}`;
+      document.getElementById("twitch-embed").children[0].src = `https://embed.twitch.tv/?channel=${video.user_id}`;
     }
   };
 

@@ -28,7 +28,6 @@ class VideoJumbotron extends React.Component {
             <ReactTwitchEmbedVideo video={stream.id} />
             <div>
             <h1 className="link">{stream.user_name}</h1>
-
               {this.renderFollowButton()}
               <h5>{stream.title}</h5>
               <h6>{stream.viewer_count} Viewers Currently Watching </h6>

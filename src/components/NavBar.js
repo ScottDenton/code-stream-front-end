@@ -44,18 +44,6 @@ class NavBar extends Component {
         <Link to={'/'} className="navbar-brand">
           CodeStream
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">
@@ -67,8 +55,7 @@ class NavBar extends Component {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >
-                Categories
+              > Categories
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="#">
@@ -97,13 +84,9 @@ class NavBar extends Component {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >
-                User
-              </a>
+              > User </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/user/edit">
-                  My Account
-                </a>
+                <a className="dropdown-item" href="/user/edit"> My Account </a>
               </div>
             </li>
           </ul>
@@ -111,11 +94,9 @@ class NavBar extends Component {
         {!this.props.loggedIn ? (
           <span className="form-inline">
             <form className="form-inline" onSubmit={this.handleSubmit}>
-              <label
-                className="sr-only"
+              <label className="sr-only"
                 htmlFor="inlineFormInputGroupUsername2"
-              >
-                Username
+              > Username
               </label>
               <div className="input-group mb-2 mr-sm-2">
                 <div className="input-group-prepend">
@@ -132,12 +113,10 @@ class NavBar extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <label
                 className="sr-only"
                 htmlFor="inlineFormInputGroupUsername2"
-              >
-                Username
+              > Username
               </label>
               <div className="input-group mb-2 mr-sm-2">
                 <div className="input-group-prepend">
@@ -154,7 +133,6 @@ class NavBar extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <button type="submit" className="btn secondary-color mb-2">
                 Login
               </button>
@@ -172,7 +150,8 @@ class NavBar extends Component {
               Sign Out
             </button>
           </form>
-        )}
+        )
+      }
       </nav>
     );
   }

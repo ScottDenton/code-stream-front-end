@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./Home.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
-import "./index.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import UserShow from "./components/UserShow.js";
+import "./Home.css";
+import "./index.css";
 
 class App extends Component {
   constructor(props) {
@@ -20,27 +20,30 @@ class App extends Component {
   }
 
   fetchFavorites = ()=> {
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
-    .then(resp => resp.json())
-    .then(followedUsers => {
-      const usernames= followedUsers.map(favorite => {
-        return favorite.followed_username
+    if(this.state.loggedInUser !== null){
+      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+      .then(resp => resp.json())
+      .then(followedUsers => {
+        const usernames= followedUsers.map(favorite => {
+          return favorite.followed_username
+        })
+        this.setState({
+          followedUsers: usernames,
+          loggedIn: true
+        }, this.fetchFavoriteVideos)
       })
-      this.setState({
-        followedUsers: usernames
-      }, this.fetchFavoriteVideos)
-    })
+    } else {
+      alert("Invalid Credentials")
+    }
   }
 
   fetchFavoriteVideos =() =>{
-    console.log('fetching fave videos')
     const videos={}
     let counter = 0
     this.state.followedUsers.map(user => {
       this.findVideosByUsername(user).then(resp =>{
         videos[user] = resp
         counter ++;
-        console.log(counter)
         if(counter === this.state.followedUsers.length){
           this.setState({
             faveVids: videos
@@ -51,7 +54,6 @@ class App extends Component {
   }
 
   findVideosByUsername =(username) =>{
-    console.log('find vids by username')
     let user_id;
     let id;
     return fetch('https://code-stream.herokuapp.com/api/v1/users')
@@ -82,8 +84,7 @@ class App extends Component {
 
   setLoggedInUser = (user) =>{
     this.setState({
-      loggedInUser: user,
-      loggedIn: true
+      loggedInUser: user
     }, this.fetchFavorites)
   }
 
@@ -94,31 +95,27 @@ class App extends Component {
   };
 
   handleFollowClick =(stream) =>{
-    const body={
-        followed_name: stream.user_name
-    }
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`,
-      {
+    const body={followed_name: stream.user_name}
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`, {
       method: "POST",
-          headers: {
-            "Accept": "application/jsofn",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(body)
-        })
-        this.setState({
-          followedUsers: [...this.state.followedUsers, stream.user_name]
-        })
-     }
+        headers: {
+          "Accept": "application/jsofn",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+      this.setState({
+        followedUsers: [...this.state.followedUsers, stream.user_name]
+      })
+   }
 
   handleUnFollowClick =(stream) =>{
-      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
     .then(resp => resp.json())
     .then(favorites =>{
       const favorite = favorites.find(fave => (fave.followed_username === stream.user_name))
-      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`, {
-        method: "DELETE"
-      })
+      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`,
+        { method: "DELETE"})
     })
     this.setState({
       followedUsers: this.state.followedUsers.filter(name => (
@@ -134,8 +131,7 @@ class App extends Component {
           <Route
             path="/"
             render={props => (
-              <NavBar
-                {...props}
+              <NavBar {...props}
                 loggedInUser={this.state.loggedInUser}
                 setLoggedInUser={this.setLoggedInUser}
                 loggedIn={this.state.loggedIn}
@@ -143,34 +139,35 @@ class App extends Component {
             )}
           />
           <Route exact path ='/'
-            render={(props) => <Home
-            {...props}
-            loggedInUser={this.state.loggedInUser}
-            handleFollowClick={this.handleFollowClick}
-            handleUnFollowClick={this.handleUnFollowClick}
-            followedUsers={this.state.followedUsers}
-            faveVids={this.state.faveVids}
-            loggedIn={this.state.loggedIn}/>}
+            render={(props) => <Home {...props}
+              loggedInUser={this.state.loggedInUser}
+              handleFollowClick={this.handleFollowClick}
+              handleUnFollowClick={this.handleUnFollowClick}
+              followedUsers={this.state.followedUsers}
+              faveVids={this.state.faveVids}
+              loggedIn={this.state.loggedIn}
+              />
+            }
           />
           <Route exact path ='/signup'
-            render={(props) => <SignUp
-            {...props}
-            loggedInUser={this.state.loggedInUser}
-            setLoggedInUser={this.setLoggedInUser}/>}
+            render={(props) => <SignUp {...props}
+              loggedInUser={this.state.loggedInUser}
+              setLoggedInUser={this.setLoggedInUser}
+              />
+            }
           />
-
           <Route
-            exact
-            path="/users/:id"
+            exact path="/users/:id"
             render={(props) =>
               <UserShow {...props}
                 loggedInUser={this.state.loggedInUser}
                 loggedIn={this.state.loggedIn}
                 handleFollowClick={this.handleFollowClick}
                 handleUnFollowClick={this.handleUnFollowClick}
-                followedUsers={this.state.followedUsers}/>}
+                followedUsers={this.state.followedUsers}
+              />
+            }
           />
-
         </React.Fragment>
       </Router>
     );

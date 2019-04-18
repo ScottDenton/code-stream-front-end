@@ -19,34 +19,34 @@ class Stream extends React.Component {
 
   componentDidMount() {
     fetch("https://code-stream.herokuapp.com/api/v1/livestreams")
-      .then(resp => resp.json())
-      .then(streams => {
-        this.setState({
-          streams: streams.data
-        });
-        // seed db with users
-        streams.data.map(stream =>{
-            const body={
-              user: {
-                username: stream.user_name,
-                user_id: stream.user_id,
-                password: 'temp'
-              }
-            }
-            fetch('https://code-stream.herokuapp.com/api/v1/users', {
-              method: "POST",
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(body)
-            }).then(resp => resp.json())
-          })
-      })
-      .then(streams => {
-        const streamArray = this.state.streams.slice(0, 1);
-        this.setJumbotron(streamArray[0]);
+    .then(resp => resp.json())
+    .then(streams => {
+      this.setState({
+        streams: streams.data
       });
+      // seed db with users
+      streams.data.map(stream =>{
+        const body={
+          user: {
+            username: stream.user_name,
+            user_id: stream.user_id,
+            password: 'temp'
+          }
+        }
+        fetch('https://code-stream.herokuapp.com/api/v1/users', {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        }).then(resp => resp.json())
+      })
+    })
+    .then(streams => {
+      const streamArray = this.state.streams.slice(0, 1);
+      this.setJumbotron(streamArray[0]);
+    });
   }
 
   setJumbotron = stream => {
@@ -57,9 +57,7 @@ class Stream extends React.Component {
 
   handleClickOnStream = stream => {
     this.setJumbotron(stream);
-    document.getElementById(
-      "twitch-embed"
-    ).children[0].src = `https://embed.twitch.tv/?channel=${stream.user_name}`;
+    document.getElementById( "twitch-embed" ).children[0].src = `https://embed.twitch.tv/?channel=${stream.user_name}`;
   };
 
 
@@ -73,7 +71,7 @@ class Stream extends React.Component {
                 stream={stream}
                 key={stream.title}
                 handleClickOnStream={this.handleClickOnStream}
-                />
+              />
             );
           })};
         </div>
@@ -81,33 +79,27 @@ class Stream extends React.Component {
   };
 
   renderIndividualFave = (obj) => {
-      const arr =  Object.values(obj)
-      const keys =Object.keys(obj)
-      let counter = 0
-       return arr.map(vidarr => {
-         counter ++;
-        return<div>
-        <h6>{keys[counter-1]} </h6>
-          <div className="stream_card_container">
-
-            {vidarr.map(stream => {
-              return (
-                <StreamCard
-                  stream={stream}
-                  key={stream.title}
-                  handleClickOnStream={this.handleClickOnStream}
-                  />
-              );
-            })};
-          </div>
+    const arr = Object.values(obj)
+    const keys = Object.keys(obj)
+    let counter = 0
+    return arr.map(vidarr => {
+      counter ++;
+      return <div>
+        <h6>{keys[counter-1]}</h6>
+        <div className="stream_card_container">
+        {vidarr.map(stream => {
+          return (
+            <StreamCard
+              stream={stream}
+              key={stream.title}
+              handleClickOnStream={this.handleClickOnStream}
+            />
+          );
+        })};
         </div>
-      })
-
-
+      </div>
+    })
   }
-
-
-
 
   render() {
     return (
@@ -119,7 +111,7 @@ class Stream extends React.Component {
         handleFollowClick ={this.props.handleFollowClick}
         followedUsers={this.props.followedUsers}
         handleUnFollowClick={this.props.handleUnFollowClick}
-        />
+      />
       {this.renderStreams(this.state.streams)}
       {this.renderIndividualFave(this.props.faveVids)}
       </div>
