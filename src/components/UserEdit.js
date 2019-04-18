@@ -16,20 +16,29 @@ componentDidMount(){
       this.setState({username: e.target.value})
   }
 
+  editFormToRender =() => {
+    if (this.props.match.params.id != this.props.loggedInUser.id){
+      return alert("What are you playing at, you may only update your own account, get out of here")
+    } else {
+        return <div id="edit_form">
+          <form className="form-group" onSubmit={(e) => this.props.submitChangeUsername(e, this.state.username)}>
+          <label className="white_label"> Please enter matching Twitch Username </label>
+          <input className ="edit_btn" type="text" name="username" value={this.state.username} placeholder="Username"
+          onChange={this.handleUsernameChange}/>
+          <input className ="btn btn-outline-warning edit_btn" type="submit" value="Update Account" />
+          </form>
+          <button className ="btn btn-outline-primary edit_btn">
+          Back to CodeStream </button>
+          <button className ="btn btn-outline-danger edit_btn">
+          Delete User Account </button>
+        </div>
+    }
+  }
   render () {
-    return(<div id="edit_form">
-      <form className="form-group" onSubmit={(e) => this.props.submitChangeUsername(e, this.state.username)}>
-      <label className="white_label"> Please enter matching Twitch Username </label>
-      <input className ="edit_btn" type="text" name="username" value={this.state.username} placeholder="Username"
-      onChange={this.handleUsernameChange}/>
-      <input className ="btn btn-outline-warning edit_btn" type="submit" value="Update Account" />
-      </form>
-      <button className ="btn btn-outline-primary edit_btn">
-      Back to CodeStream </button>
-      <button className ="btn btn-outline-danger edit_btn">
-        Delete User Account </button>
-
-    </div>)
+    return (<div>
+        {this.editFormToRender()}
+        </div>
+    )
 
   }
 }
