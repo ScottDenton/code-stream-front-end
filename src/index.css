@@ -84,3 +84,20 @@ code {
   align-content: center;
   padding-top: 100px;
 }
+#edit_form{
+  background-color: #606060;
+  text-align: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 30%;
+  margin: 20px auto;
+}
+
+.edit_btn {
+  display: block;
+  margin: 10px auto;
+
+}
+.white_label {
+  color: white;
+}

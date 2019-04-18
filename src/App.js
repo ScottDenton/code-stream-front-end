@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
 import UserShow from "./components/UserShow.js";
+import UserEdit from "./components/UserEdit.js";
 import "./Home.css";
 import "./index.css";
 
@@ -96,12 +97,31 @@ class App extends Component {
     });
   };
 
+
+  submitChangeUsername = (e, newUsername) => {
+    e.preventDefault();
+    const body = {
+      username: newUsername
+    }
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    }).then(resp => resp.json())
+    .then(updatedUser => {
+      this.setState({loggedInUser: updatedUser})
+    }, alert("Account succesfully updated"))
+  }
+
   handleFollowClick =(stream) =>{
     const body={followed_name: stream.user_name}
     fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`, {
       method: "POST",
         headers: {
-          "Accept": "application/jsofn",
+          "Accept": "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
@@ -171,6 +191,17 @@ class App extends Component {
               />
             }
           />
+          <Route
+            exact path="/users/:id/edit"
+            render={(props) =>
+              <UserEdit {...props}
+                loggedInUser={this.state.loggedInUser}
+                handleUsernameChange ={this.handleUsernameChange}
+                submitChangeUsername={this.submitChangeUsername}
+              />
+            }
+          />
+
         </React.Fragment>
       </Router>
     );

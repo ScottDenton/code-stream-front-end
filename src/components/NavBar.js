@@ -86,7 +86,7 @@ class NavBar extends Component {
                 aria-expanded="false"
               > User </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/user/edit"> My Account </a>
+                <Link to={`/users/${this.props.loggedInUser.id}/edit`} className="dropdown-item"> My Account </Link>
                 <div className="dropdown-divider" />
                 <div className="dropdown-item" onClick={this.props.signOut} >
                   Log Out
