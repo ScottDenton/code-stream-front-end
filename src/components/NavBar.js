@@ -87,10 +87,15 @@ class NavBar extends Component {
               > User </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="/user/edit"> My Account </a>
+                <div className="dropdown-divider" />
+                <div className="dropdown-item" onClick={this.props.signOut} >
+                  Log Out
+                </div>
               </div>
             </li>
           </ul>
         </div>
+
         {!this.props.loggedIn ? (
           <span className="form-inline">
             <form className="form-inline" onSubmit={this.handleSubmit}>

@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 
 export default class FollowButton extends Component {
-  constructor(props){
-    super(props)
-  }
+
 
   render () {
     const name = this.props.stream.user_name

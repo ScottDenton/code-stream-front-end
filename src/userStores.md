@@ -43,7 +43,7 @@ back end sends that to front end as the response to the original fetch
 password validation- client side. repeat password etc
   if errors on initial signup throw an error and dont re direct.
 
-
+when sign out, removes favorites from screen/stream
 
 live videos have some special css
 

@@ -13,7 +13,6 @@ class App extends Component {
     this.state = {
       loggedInUser: {},
       loggedIn: false,
-      displaySignUp: false,
       followedUsers: [],
       faveVids: []
     }
@@ -88,9 +87,11 @@ class App extends Component {
     }, this.fetchFavorites)
   }
 
-  signOut = () => {
+  signOut = (e) => {
+    e.preventDefault();
+    console.log('signing out')
     this.setState({
-      loggedInUser: {}
+      loggedIn: false
     });
   };
 
@@ -135,6 +136,7 @@ class App extends Component {
                 loggedInUser={this.state.loggedInUser}
                 setLoggedInUser={this.setLoggedInUser}
                 loggedIn={this.state.loggedIn}
+                signOut={this.signOut}
               />
             )}
           />

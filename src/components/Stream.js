@@ -91,7 +91,7 @@ class Stream extends React.Component {
           return (
             <StreamCard
               stream={stream}
-              key={stream.title}
+              key={stream.id}
               handleClickOnStream={this.handleClickOnStream}
             />
           );

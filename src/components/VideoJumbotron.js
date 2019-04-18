@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 import FollowButton from './FollowButton'
 
