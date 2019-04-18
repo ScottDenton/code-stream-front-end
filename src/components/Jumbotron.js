@@ -27,7 +27,7 @@ class Jumbotron extends React.Component {
       <div>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <ReactTwitchEmbedVideo channel={stream.user_name} />
+            <ReactTwitchEmbedVideo channel={stream.user_name} layout="video"/>
             <div>
               <Link to={`users/${stream.user_id}`}>
                 <h1 className="link">{stream.user_name}</h1>
