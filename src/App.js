@@ -91,7 +91,8 @@ class App extends Component {
     e.preventDefault();
     console.log('signing out')
     this.setState({
-      loggedIn: false
+      loggedIn: false,
+      faveVids: []
     });
   };
 
