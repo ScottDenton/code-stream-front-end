@@ -23,7 +23,7 @@ class SignUp extends React.Component {
         password: this.state.password
       }
     };
-    fetch("https://code-stream.herokuapp.com/api/v1/users", {
+    fetch("https://code-stream-api.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         Accept: "application/json",

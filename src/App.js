@@ -21,7 +21,7 @@ class App extends Component {
 
   fetchFavorites = ()=> {
     if(this.state.loggedInUser !== null){
-      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+      fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
       .then(resp => resp.json())
       .then(followedUsers => {
         const usernames= followedUsers.map(favorite => {
@@ -56,7 +56,7 @@ class App extends Component {
   findVideosByUsername =(username) =>{
     let user_id;
     let id;
-    return fetch('https://code-stream.herokuapp.com/api/v1/users')
+    return fetch('https://code-stream-api.herokuapp.com/api/v1/users')
     .then(resp => resp.json())
     .then(users => {
         const foundUser =  users.find(user => {
@@ -67,7 +67,7 @@ class App extends Component {
       })
     .then(users =>{
       const body={twitch_id: user_id}
-      return fetch(`https://code-stream.herokuapp.com/sessions/getUserVideos`,{
+      return fetch(`https://code-stream-api.herokuapp.com/sessions/getUserVideos`,{
         method: "POST",
         headers: {
           'Accept': "application/json",
@@ -105,7 +105,7 @@ class App extends Component {
     const body = {
       username: newUsername
     }
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}`, {
+    fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}`, {
       method: "PATCH",
       headers: {
         "Accept": "application/json",
@@ -120,7 +120,7 @@ class App extends Component {
 
   handleFollowClick =(stream) =>{
     const body={followed_name: stream.user_name}
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`, {
+    fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`, {
       method: "POST",
         headers: {
           "Accept": "application/json",
@@ -134,11 +134,11 @@ class App extends Component {
    }
 
   handleUnFollowClick =(stream) =>{
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+    fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
     .then(resp => resp.json())
     .then(favorites =>{
       const favorite = favorites.find(fave => (fave.followed_username === stream.user_name))
-      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`,
+      fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`,
         { method: "DELETE"})
     })
     this.setState({

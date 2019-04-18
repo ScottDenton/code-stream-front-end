@@ -17,7 +17,7 @@ export default class UserEdit extends Component {
 
   deleteUser = () => {
     const id = this.props.loggedInUser.id
-    fetch(`https://code-stream.herokuapp.com/api/v1/users/${id}`, {
+    fetch(`https://code-stream-api.herokuapp.com/api/v1/users/${id}`, {
       method: "Delete"
     }).then(resp => {
       alert("User deleted")

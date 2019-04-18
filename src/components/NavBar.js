@@ -24,7 +24,7 @@ class NavBar extends Component {
       password: this.state.password
     };
 
-    fetch("https://code-stream.herokuapp.com/sessions/create", {
+    fetch("https://code-stream-api.herokuapp.com/sessions/create", {
       method: "POST",
       headers: {
         Accept: "application/json",
