@@ -89,7 +89,9 @@ class App extends Component {
   }
 
   signOut = (e) => {
-    e.preventDefault();
+    if(e){
+      e.preventDefault();
+    }
     console.log('signing out')
     this.setState({
       loggedIn: false,
@@ -198,6 +200,7 @@ class App extends Component {
                 loggedInUser={this.state.loggedInUser}
                 handleUsernameChange ={this.handleUsernameChange}
                 submitChangeUsername={this.submitChangeUsername}
+                signOut={this.signOut}
               />
             }
           />

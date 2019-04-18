@@ -35,7 +35,8 @@ class NavBar extends Component {
       .then(resp => resp.json())
       .then(user => {
         this.props.setLoggedInUser(user);
-      });
+      })
+      .catch(error => console.error("Error:", error));
   };
 
   render() {
@@ -85,13 +86,15 @@ class NavBar extends Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               > User </a>
+            {this.props.loggedIn ?(
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <Link to={`/users/${this.props.loggedInUser.id}/edit`} className="dropdown-item"> My Account </Link>
                 <div className="dropdown-divider" />
                 <div className="dropdown-item" onClick={this.props.signOut} >
                   Log Out
                 </div>
-              </div>
+              </div>) : ( <div> </div>)
+            }
             </li>
           </ul>
         </div>

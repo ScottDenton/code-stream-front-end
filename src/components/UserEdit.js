@@ -6,14 +6,23 @@ export default class UserEdit extends Component {
   state={
   }
 
-componentDidMount(){
-  this.setState({
-    username: this.props.loggedInUser.username
-  })
-}
-
+  componentDidMount(){
+    this.setState({
+      username: this.props.loggedInUser.username
+    })
+  }
   handleUsernameChange =(e) => {
       this.setState({username: e.target.value})
+  }
+
+  deleteUser = () => {
+    const id = this.props.loggedInUser.id
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${id}`, {
+      method: "Delete"
+    }).then(resp => {
+      alert("User deleted")
+      this.props.signOut()
+    })
   }
 
   editFormToRender =() => {
@@ -27,10 +36,14 @@ componentDidMount(){
           onChange={this.handleUsernameChange}/>
           <input className ="btn btn-outline-warning edit_btn" type="submit" value="Update Account" />
           </form>
-          <button className ="btn btn-outline-primary edit_btn">
-          Back to CodeStream </button>
-          <button className ="btn btn-outline-danger edit_btn">
-          Delete User Account </button>
+          <Link to={'/'} >
+            <button className ="btn btn-outline-primary edit_btn">
+            Back to CodeStream </button>
+          </Link>
+          <Link to={'/'} >
+            <button onClick={this.deleteUser} className ="btn btn-outline-danger edit_btn">
+            Delete User Account </button>
+            </Link>
         </div>
     }
   }
