@@ -6,7 +6,8 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <Stream loggedInUser={this.props.loggedInUser}
+        <Stream
+          loggedInUser={this.props.loggedInUser}
           handleFollowClick={this.props.handleFollowClick}
           followedUsers={this.props.followedUsers}
           handleUnFollowClick={this.props.handleUnFollowClick}
