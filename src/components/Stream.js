@@ -88,6 +88,8 @@ class Stream extends React.Component {
         <h6>{keys[counter-1]}</h6>
         <div className="stream_card_container">
         {vidarr.map(stream => {
+          console.log('video streams video', stream)
+
           return (
             <StreamCard
               stream={stream}
