@@ -101,3 +101,14 @@ code {
 .white_label {
   color: white;
 }
+
+.live {
+  box-shadow:
+        0 0 2px #fff,
+        -2px 0 3px #40b1bd,
+        2px 0 3px #ff9a2e;
+}
+
+.title {
+  text-shadow:  0 0 4px #40b1bd, 0 0 5px #ff9a2e, 0 0 6px #40b1bd, 0 0 7px #ff9a2e
+}

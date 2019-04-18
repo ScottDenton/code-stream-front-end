@@ -12,7 +12,7 @@ class Stream extends React.Component {
       <div>
         <div className="card" onClick={() => this.props.handleClickOnStream(stream)} >
           {stream.type ==='live' || stream.thumbnail_url === '' ?
-            <img src={image_url} className="card-img-top" alt="..." />
+            <img src={image_url} className="card-img-top live" alt="..." />
             : <img src={archiveUrl}
           className="card-img-top" alt="..." />
         }

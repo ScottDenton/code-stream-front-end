@@ -63,7 +63,7 @@ class Stream extends React.Component {
 
   renderStreams = (arr) => {
     return <div>
-      <h6>Live Streams </h6>
+      <h6 className='title'> Live Streams </h6>
         <div className="stream_card_container">
            {arr.map(stream => {
             return (
@@ -88,7 +88,6 @@ class Stream extends React.Component {
         <h6>{keys[counter-1]}</h6>
         <div className="stream_card_container">
         {vidarr.map(stream => {
-          console.log('video streams video', stream)
 
           return (
             <StreamCard
