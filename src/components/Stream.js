@@ -18,7 +18,7 @@ class Stream extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/livestreams")
+    fetch("https://code-stream.herokuapp.com/api/v1/livestreams")
       .then(resp => resp.json())
       .then(streams => {
         this.setState({
@@ -33,7 +33,7 @@ class Stream extends React.Component {
                 password: 'temp'
               }
             }
-            fetch('http://localhost:3000/api/v1/users', {
+            fetch('https://code-stream.herokuapp.com/api/v1/users', {
               method: "POST",
               headers: {
                 "Accept": "application/json",

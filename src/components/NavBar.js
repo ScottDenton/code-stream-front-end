@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class NavBar extends Component {
       password: this.state.password
     };
 
-    fetch("http://localhost:3000/sessions/create", {
+    fetch("https://code-stream.herokuapp.com/sessions/create", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -39,9 +41,9 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="navbar sticky-top navbar-expand-lg navbar-light primary-color">
-        <a className="navbar-brand" href="/">
+        <Link to={'/'} className="navbar-brand">
           CodeStream
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

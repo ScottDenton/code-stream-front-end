@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   fetchFavorites = ()=> {
-    fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
     .then(resp => resp.json())
     .then(followedUsers => {
       const usernames= followedUsers.map(favorite => {
@@ -54,7 +54,7 @@ class App extends Component {
     console.log('find vids by username')
     let user_id;
     let id;
-    return fetch('http://localhost:3000/api/v1/users')
+    return fetch('https://code-stream.herokuapp.com/api/v1/users')
     .then(resp => resp.json())
     .then(users => {
         const foundUser =  users.find(user => {
@@ -65,7 +65,7 @@ class App extends Component {
       })
     .then(users =>{
       const body={twitch_id: user_id}
-      return fetch(`http://localhost:3000/sessions/getUserVideos`,{
+      return fetch(`https://code-stream.herokuapp.com/sessions/getUserVideos`,{
         method: "POST",
         headers: {
           'Accept': "application/json",
@@ -97,7 +97,7 @@ class App extends Component {
     const body={
         followed_name: stream.user_name
     }
-    fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`,
+    fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`,
       {
       method: "POST",
           headers: {
@@ -112,11 +112,11 @@ class App extends Component {
      }
 
   handleUnFollowClick =(stream) =>{
-      fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
+      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites`)
     .then(resp => resp.json())
     .then(favorites =>{
       const favorite = favorites.find(fave => (fave.followed_username === stream.user_name))
-      fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`, {
+      fetch(`https://code-stream.herokuapp.com/api/v1/users/${this.state.loggedInUser.id}/favorites/${favorite.id}`, {
         method: "DELETE"
       })
     })
