@@ -56,6 +56,7 @@ class UserShow extends React.Component {
           handleClickOnStream={this.handleClickOnStream}
           followedUsers={this.props.followedUsers}
           handleFollowClick={this.props.handleFollowClick}
+          handleUnFollowClick={this.props.handleUnFollowClick}
         />
       </div>
     );

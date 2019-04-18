@@ -24,6 +24,7 @@ class VideoStream extends React.Component {
           loggedInUser={this.props.loggedInUser}
           followedUsers={this.props.followedUsers}
           handleFollowClick={this.props.handleFollowClick}
+          handleUnFollowClick={this.props.handleUnFollowClick}
           loggedIn={this.props.loggedIn}
         />
       ) : (
@@ -32,6 +33,7 @@ class VideoStream extends React.Component {
           loggedInUser={this.props.loggedInUser}
           followedUsers={this.props.followedUsers}
           handleFollowClick={this.props.handleFollowClick}
+          handleUnFollowClick={this.props.handleUnFollowClick}
           loggedIn={this.props.loggedIn}
         />
       );
