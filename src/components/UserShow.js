@@ -57,9 +57,12 @@ class UserShow extends React.Component {
       <div className="Home">
         <VideoStreams
           loggedInUser={this.props.loggedInUser}
+          loggedIn={this.props.loggedIn}
           videos={this.state.videos}
           jumbotronStream={this.state.jumbotronStream}
           handleClickOnStream={this.handleClickOnStream}
+          followedUsers={this.props.followedUsers}
+          handleFollowClick={this.props.handleFollowClick}
         />
       </div>
     );

@@ -8,13 +8,24 @@ class Jumbotron extends React.Component {
     super(props);
   }
 
-
-
-
+  renderFollowButton =() =>{
+    const stream = this.props.stream;
+    if(this.props.loggedIn){
+      console.log('logged in')
+     return <FollowButton
+       stream ={stream} handleFollowClick={this.props.handleFollowClick}
+       handleUnFollowClick={this.props.handleUnFollowClick}
+       followedUsers={this.props.followedUsers}
+       loggedIn={this.props.loggedIn}/>
+     } else {
+       console.log('logged out')
+       return
+     }
+  }
 
   render() {
     const stream = this.props.stream;
-
+    console.log('followed users', this.props.followedUsers)
     return (
       <div>
         <div className="jumbotron jumbotron-fluid">
@@ -24,10 +35,7 @@ class Jumbotron extends React.Component {
               <Link to={`users/${stream.user_id}`}>
                 <h1 className="link">{stream.user_name}</h1>
               </Link>
-              <FollowButton
-                stream ={stream} handleFollowClick={this.props.handleFollowClick}
-                handleUnFollowClick={this.props.handleUnFollowClick}
-                followedUsers={this.props.followedUsers}/>
+              {this.renderFollowButton()}
                 <h5>{stream.title}</h5>
                 <h6>{stream.viewer_count} Viewers Currently Watching </h6>
             </div>

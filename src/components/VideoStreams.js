@@ -22,11 +22,17 @@ class VideoStream extends React.Component {
         <Jumbotron
           stream={this.props.jumbotronStream}
           loggedInUser={this.props.loggedInUser}
+          followedUsers={this.props.followedUsers}
+          handleFollowClick={this.props.handleFollowClick}
+          loggedIn={this.props.loggedIn}
         />
       ) : (
         <VideoJumbotron
           stream={this.props.jumbotronStream}
           loggedInUser={this.props.loggedInUser}
+          followedUsers={this.props.followedUsers}
+          handleFollowClick={this.props.handleFollowClick}
+          loggedIn={this.props.loggedIn}
         />
       );
     return (

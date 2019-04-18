@@ -91,7 +91,6 @@ class Stream extends React.Component {
           <div className="stream_card_container">
 
             {vidarr.map(stream => {
-              console.log('stream', stream)
               return (
                 <StreamCard
                   stream={stream}
@@ -116,6 +115,7 @@ class Stream extends React.Component {
       <Jumbotron
         stream={this.state.jumbotronStream}
         loggedInUser={this.props.loggedInUser}
+        loggedIn={this.props.loggedIn}
         handleFollowClick ={this.props.handleFollowClick}
         followedUsers={this.props.followedUsers}
         handleUnFollowClick={this.props.handleUnFollowClick}

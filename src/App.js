@@ -19,68 +19,66 @@ class App extends Component {
     }
   }
 
-fetchFavorites = ()=> {
-  fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
-  .then(resp => resp.json())
-  .then(followedUsers => {
-    const usernames= followedUsers.map(favorite => {
-      return favorite.followed_username
-    })
-    this.setState({
-      followedUsers: usernames
-    }, this.fetchFavoriteVideos)
-  })
-}
-
-fetchFavoriteVideos =() =>{
-  console.log('fetching fave videos')
-  const videos={}
-  let counter = 0
-  this.state.followedUsers.map(user => {
-    this.findVideosByUsername(user).then(resp =>{
-      videos[user] = resp
-      counter ++;
-      console.log(counter)
-      if(counter === this.state.followedUsers.length){
-        this.setState({
-          faveVids: videos
-        })
-      }
-    })
-  })
-  console.log('fetched videos', videos)
-
-}
-
-findVideosByUsername =(username) =>{
-  console.log('find vids by username')
-  let user_id;
-  let id;
-  return fetch('http://localhost:3000/api/v1/users')
-  .then(resp => resp.json())
-  .then(users => {
-      const foundUser =  users.find(user => {
-        return user.username === username
-      })
-        user_id = foundUser.user_id
-        id = foundUser.id
-    })
-  .then(users =>{
-    const body={twitch_id: user_id}
-    return fetch(`http://localhost:3000/sessions/getUserVideos`,{
-      method: "POST",
-      headers: {
-        'Accept': "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
+  fetchFavorites = ()=> {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.loggedInUser.id}/favorites`)
     .then(resp => resp.json())
-    .then(json => {
-       return json.data
+    .then(followedUsers => {
+      const usernames= followedUsers.map(favorite => {
+        return favorite.followed_username
+      })
+      this.setState({
+        followedUsers: usernames
+      }, this.fetchFavoriteVideos)
     })
-  })
-}
+  }
+
+  fetchFavoriteVideos =() =>{
+    console.log('fetching fave videos')
+    const videos={}
+    let counter = 0
+    this.state.followedUsers.map(user => {
+      this.findVideosByUsername(user).then(resp =>{
+        videos[user] = resp
+        counter ++;
+        console.log(counter)
+        if(counter === this.state.followedUsers.length){
+          this.setState({
+            faveVids: videos
+          })
+        }
+      })
+    })
+  }
+
+  findVideosByUsername =(username) =>{
+    console.log('find vids by username')
+    let user_id;
+    let id;
+    return fetch('http://localhost:3000/api/v1/users')
+    .then(resp => resp.json())
+    .then(users => {
+        const foundUser =  users.find(user => {
+          return user.username === username
+        })
+          user_id = foundUser.user_id
+          id = foundUser.id
+      })
+    .then(users =>{
+      const body={twitch_id: user_id}
+      return fetch(`http://localhost:3000/sessions/getUserVideos`,{
+        method: "POST",
+        headers: {
+          'Accept': "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      })
+      .then(resp => resp.json())
+      .then(json => {
+         return json.data
+      })
+    })
+  }
 
   setLoggedInUser = (user) =>{
     this.setState({
@@ -141,19 +139,18 @@ findVideosByUsername =(username) =>{
                 loggedInUser={this.state.loggedInUser}
                 setLoggedInUser={this.setLoggedInUser}
                 loggedIn={this.state.loggedIn}
-
               />
             )}
           />
           <Route exact path ='/'
-          render={(props) => <Home
-          {...props}
-          loggedInUser={this.state.loggedInUser}
-          handleFollowClick={this.handleFollowClick}
-          handleUnFollowClick={this.handleUnFollowClick}
-          followedUsers={this.state.followedUsers}
-          faveVids={this.state.faveVids}
-          />}
+            render={(props) => <Home
+            {...props}
+            loggedInUser={this.state.loggedInUser}
+            handleFollowClick={this.handleFollowClick}
+            handleUnFollowClick={this.handleUnFollowClick}
+            followedUsers={this.state.followedUsers}
+            faveVids={this.state.faveVids}
+            loggedIn={this.state.loggedIn}/>}
           />
           <Route exact path ='/signup'
             render={(props) => <SignUp
@@ -165,11 +162,15 @@ findVideosByUsername =(username) =>{
           <Route
             exact
             path="/users/:id"
-            render={props => (
-              <UserShow {...props} loggedInUser={this.state.loggedInUser} />
-            )}
+            render={(props) =>
+              <UserShow {...props}
+                loggedInUser={this.state.loggedInUser}
+                loggedIn={this.state.loggedIn}
+                handleFollowClick={this.handleFollowClick}
+                handleUnFollowClick={this.handleUnFollowClick}
+                followedUsers={this.state.followedUsers}/>}
           />
-          <Route exact path="/user/:id/edit" component={UserShow} />
+
         </React.Fragment>
       </Router>
     );

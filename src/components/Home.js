@@ -10,7 +10,8 @@ class Home extends Component {
           handleFollowClick={this.props.handleFollowClick}
           followedUsers={this.props.followedUsers}
           handleUnFollowClick={this.props.handleUnFollowClick}
-          faveVids={this.props.faveVids}/>
+          faveVids={this.props.faveVids}
+          loggedIn={this.props.loggedIn}/>
       </div>
     );
   }
