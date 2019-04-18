@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ScottDenton/code-stream-front-end/precache-manifest.9457e8926ddd44b7846a338e36328457.js"
+  "/code-stream-front-end/precache-manifest.71bc6d06e26488a4b9244861b8035496.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ScottDenton/code-stream-front-end/index.html", {
+workbox.routing.registerNavigationRoute("/code-stream-front-end/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
