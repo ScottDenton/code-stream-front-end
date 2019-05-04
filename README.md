@@ -1,6 +1,6 @@
 # [Code Stream](http://code-stream.herokuapp.com/)
 
-[Code Stream](http://code-stream.herokuapp.com/) is an app designed and built by Scott Slatton and Scott Denton as a 4 day partner project.
+[Code Stream](http://code-stream.herokuapp.com/) is an app designed and built by [Scott Slatton](https://github.com/scottslatton) and [Scott Denton](https://github.com/ScottDenton) as a 4 day partner project.
 
 Prior to a user signing up or logging in, the app shows the 20 most popular science and technology live streams currently on Twitch.
 
